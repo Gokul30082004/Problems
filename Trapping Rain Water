@@ -1,0 +1,22 @@
+public class Solution {
+    public int trap(int[] height) {
+        int left[]=new int[height.length];
+        int right[]=new int[height.length];
+        int temp=height[0];
+        for(int i=1;i<height.length;i++){
+            left[i]=temp;
+            temp=Math.max(height[i],temp);
+        }
+        temp=height[height.length-1];
+        for(int j=height.length-2;j>=0;j--){
+            right[j]=temp;
+            temp=Math.max(height[j],temp);
+        }
+        int ans=0;
+        for(int i=1;i<height.length;i++){
+            if((Math.min(left[i],right[i]))-height[i]>0)
+            ans+=(Math.min(left[i],right[i]))-height[i];
+        }
+        return ans;
+    }
+}
