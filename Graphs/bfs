@@ -1,0 +1,26 @@
+import java.util.List;
+import java.util.Queue;
+import java.util.*;
+public class Solution {
+    public static List<Integer> bfsTraversal(int n, List<List<Integer>> adj){
+        boolean[] visited=new boolean[n];
+        List<Integer> list=new ArrayList<>(n);
+        Arrays.fill(visited,false);
+        Queue<Integer> q=new LinkedList<>();
+        q.add(0);
+        visited[0]=true;
+        list.add(0);
+        while(!q.isEmpty()){
+            int temp=q.poll();
+            for(int p:adj.get(temp)){
+                if(visited[p]==false){
+                    visited[p]=true;
+                    q.add(p);
+                    list.add(p);
+                }
+            }
+        }
+        return list;
+    }
+}
+
