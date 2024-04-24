@@ -1,0 +1,31 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	public static int find(int matrix[][],int i,int j,int dp[][]){
+		if(i+1==matrix.length)
+		{
+			return matrix[i][j];
+		}
+		if(dp[i][j]!=-1) return dp[i][j];
+		int left=Integer.MIN_VALUE,right=Integer.MIN_VALUE;
+		if(j-1>=0)
+		left=find(matrix,i+1,j-1,dp)+matrix[i][j];
+		if(j+1<matrix[0].length)
+		right=find(matrix,i+1,j+1,dp)+matrix[i][j];
+
+		int mid=find(matrix,i+1,j,dp)+matrix[i][j];
+		dp[i][j]=Math.max(mid,Math.max(left,right));
+		return Math.max(mid,Math.max(left,right));
+	}
+	public static int getMaxPathSum(int[][] matrix) {
+		int ans=Integer.MIN_VALUE;
+		int dp[][]=new int[matrix.length][matrix[0].length];
+		for(int i=0;i<matrix.length;i++)
+			Arrays.fill(dp[i],-1);
+		for(int i=0;i<matrix[0].length;i++){
+			ans=Math.max(ans,find(matrix,0,i,dp));
+		}
+		return ans;
+	}
+}

@@ -1,0 +1,14 @@
+#include <bits/stdc++.h> 
+int find(int n, int dp[]){
+    if(dp[n]!=-1) return dp[n];
+    if(n==1 | n==0) return 1;
+    dp[n]=(find(n-1,dp)+find(n-2,dp)) % 1000000007;
+    return dp[n];
+}
+
+int countDistinctWays(int n) {
+    int dp[n+1];
+    for(int i=0;i<=n;i++)
+        dp[i]=-1;
+    find(n ,dp);
+}

@@ -1,0 +1,24 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    static public int find(int[][] a,int i,int j,int[][] dp){
+        if(i==0 && j==0){
+            return a[0][0];
+        }
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+        int left=Integer.MAX_VALUE,right=Integer.MAX_VALUE;
+        if(i>0)
+        left=find(a,i-1,j,dp)+a[i][j];
+        if(j>0)
+        right=find(a,i,j-1,dp)+a[i][j];
+        dp[i][j]=Math.min(left,right);
+        return Math.min(left,right);
+    }
+    public static int minSumPath(int[][] grid) {
+        int dp[][]=new int[grid.length][grid[0].length];
+        for(int i=0;i<grid.length;i++)
+        Arrays.fill(dp[i],-1);
+    	return find(grid,grid.length-1,grid[0].length-1,dp);
+    }
+}
