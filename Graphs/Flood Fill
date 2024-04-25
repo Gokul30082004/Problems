@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Solution {
+    public static int[][] floodFill(int[][] image, int n, int m, int a, int b, int p) {
+        Queue<int[]> q=new LinkedList<>();
+        q.add(new int[]{a,b});
+        int val=image[a][b];
+        image[a][b]=p;
+        while(!q.isEmpty()){
+            int[] temp=q.poll();
+            int x=temp[0];
+            int y=temp[1];
+            if(x>0 && image[x-1][y]==val){
+                image[x-1][y]=p;
+                q.add(new int[]{x-1,y});
+            }
+            if(y>0 && image[x][y-1]==val){
+                image[x][y-1]=p;
+                q.add(new int[]{x,y-1});
+            }
+            if(y+1<m && image[x][y+1]==val){
+                image[x][y+1]=p;
+                q.add(new int[]{x,y+1});
+            }
+            if(x+1<n && image[x+1][y]==val){
+                image[x+1][y]=p;
+                q.add(new int[]{x+1,y});
+            }
+        }
+        return image;
+    }
+}
