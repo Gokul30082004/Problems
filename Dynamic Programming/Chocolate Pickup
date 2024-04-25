@@ -1,0 +1,50 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int find(int i,int j1,int j2,int[][] grid,int c,int[][][] dp){
+		if(j1<0 || j2<0 || j1>=c || j2>=c){
+			return 0;
+		}
+		if(i==grid.length-1){
+			if(j1!=j2)
+			return grid[i][j1]+grid[i][j2];
+			
+			return grid[i][j1];
+		}
+		if(dp[i][j1][j2]!=-1) return dp[i][j1][j2]; 
+		// if(dp.get(i).get(1).get(1)!=-1) return dp.get(i).get(1).get(2);
+		int maxi=Integer.MIN_VALUE;
+		for(int j=-1;j<=1;j++){
+			for (int k=-1;k<=1;k++){
+				int value=0;
+				if(j1==j2)
+				value+=grid[i][j1];
+				else
+				value+=grid[i][j1]+grid[i][j2];
+
+				value+=find(i+1,j1+j,j2+k,grid,c,dp);
+				maxi=Math.max(value,maxi);
+		}
+		}
+		// dp.get(i).get(j1).add(j2,maxi);
+		dp[i][j1][j2]=maxi;
+		return maxi;
+	}
+	public static int maximumChocolates(int r, int c, int[][] grid) {
+		// ArrayList<ArrayList<ArrayList<Integer>>> dp=new ArrayList<>(r);
+		// for(int i=0;i<r;i++){
+		// 	dp.add(new ArrayList<ArrayList<Integer>>(c));
+		// 	for(int j=0;j<c;j++){
+		// 		dp.get(i).add(new ArrayList<Integer>(c));
+		// 		Collections.fill(dp.get(i).get(j),-1);
+		// 	}
+		// }
+		int dp[][][]=new int[r][c][c];
+		for(int i=0;i<r;i++){
+			for(int j=0;j<c;j++){
+				Arrays.fill(dp[i][j],-1);
+			}
+		}
+		return find(0,0,c-1,grid,c,dp);
+	}
+}
