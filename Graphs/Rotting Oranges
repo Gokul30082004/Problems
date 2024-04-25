@@ -1,0 +1,55 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+import com.sun.org.apache.xerces.internal.xni.QName;
+
+public class Solution {
+
+	public static int minTimeToRot(int[][] grid, int n, int m) {
+		Queue<int[]> q=new LinkedList<>();
+		int fresh_count=0;
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				if(grid[i][j]==2){
+					q.add(new int[]{i,j});;
+				}
+				if(grid[i][j]!=0){
+					fresh_count++;
+				}
+			}
+		}
+		int ans=0;
+		int count=0;
+		while(!q.isEmpty()){
+			int size=q.size();
+			count+=size;
+			for(int i=0;i<size;i++){
+				int[] temp=q.poll();
+				int x=temp[0];
+				int y=temp[1];
+				if(x>0 && grid[x-1][y]==1){
+					grid[x-1][y]=2;
+					q.add(new int[]{x-1,y});
+				}
+				if(y>0 && grid[x][y-1]==1){
+					grid[x][y-1]=2;
+					q.add(new int[]{x,y-1});
+				}
+				if(y+1<m && grid[x][y+1]==1){
+					grid[x][y+1]=2;
+					q.add(new int[]{x,y+1});
+				}
+				if(x+1<n && grid[x+1][y]==1){
+					grid[x+1][y]=2;
+					q.add(new int[]{x+1,y});
+				}
+			}
+			if(!q.isEmpty())
+			ans++;
+		}
+
+		// System.out.println(count+" "+fresh_count);
+		return count==fresh_count?ans:-1;
+	}
+
+}
