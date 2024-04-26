@@ -1,0 +1,73 @@
+class Solution {
+    public String multiply(String num1, String num2) {
+        String remainder="0"; 
+        String res="";
+        int k=0;
+        for(int i=num2.length()-1;i>=0;i--){
+            String ans="";
+            for(int j=num1.length()-1;j>=0;j--){
+                ans+=String.valueOf((((num2.charAt(i)-'0')*(num1.charAt(j)-'0'))+remainder.charAt(0)-'0')%10);
+                if(((num2.charAt(i)-'0')*(num1.charAt(j)-'0'))+remainder.charAt(0)-'0'>=10){
+                    remainder=String.valueOf(((num2.charAt(i)-'0')*(num1.charAt(j)-'0'))/10);
+                }
+                else{
+                    remainder="0";
+                }
+                System.out.println(ans+" "+remainder);
+                if(j==0 && remainder.charAt(0)-'0'!=0){
+                    ans+=remainder;
+                }
+            }
+            if(i==num2.length()-1){
+                res+=ans;
+            }
+            else{
+                int l=k,rem=0;
+                while(!ans.isEmpty()){
+                    if(l<res.length()){
+                        if((res.charAt(l)-'0')+(ans.charAt(0)-'0')+rem<10){
+                            res=res.substring(0,l)+String.valueOf((res.charAt(l)-'0')+(ans.charAt(0)-'0')+rem)+res.substring(l+1,res.length());
+                            rem=0;
+                        }
+                        
+                        else{
+                            int temp=(((res.charAt(l)-'0')+(ans.charAt(0)-'0')+rem)/10);
+                            res=res.substring(0,l)+String.valueOf(((res.charAt(l)-'0')+(ans.charAt(0)-'0')+rem)%10)+res.substring(l+1,res.length());
+                            rem=temp;
+                            System.out.println("Remainder  "+rem+" "+res.charAt(l)+" "+ans.charAt(0));
+                        }
+                    
+                    }
+                    else{
+                        res+=String.valueOf((ans.charAt(0)-'0')+rem);
+                        rem=0;
+                    }
+                    
+
+                    ans=ans.substring(1,ans.length());
+                    ++l;
+                }
+                if(rem!=0){
+                    res+=rem;
+                }
+            }
+            
+            System.out.println(" "+res+"    "+k);
+            k++;
+            remainder="0";
+        }
+        StringBuffer sbr = new StringBuffer(res);
+        sbr.reverse();
+        res=sbr.toString();
+        for(int i=0;i<res.length()-1;i++)
+        {
+            if(res.charAt(i)=='0'){
+                res=res.substring(1,res.length());
+                --i;
+            }
+            else
+            break;
+        }
+        return res;
+    }
+}
