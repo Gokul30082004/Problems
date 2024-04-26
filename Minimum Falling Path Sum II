@@ -1,0 +1,28 @@
+class Solution {
+    public int findfalling(int[][] grid,int i,int j,int[][] dp){
+        if(i+1==grid.length)
+        return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int temp=Integer.MAX_VALUE;
+        // System.out.print(" "+ans);
+        for(int k=0;k<grid.length;k++){
+            if(j!=k){
+                temp=Math.min(temp,findfalling(grid,i+1,k,dp)+grid[i+1][k]);
+            }
+        }
+
+        // System.out.print(" "+temp);
+        dp[i][j]=temp;
+        return dp[i][j];
+    }
+    public int minFallingPathSum(int[][] grid) {
+        int ans=Integer.MAX_VALUE;
+        int dp[][]=new int[grid.length][grid.length];
+        for(int i=0;i<grid.length;i++)
+            Arrays.fill(dp[i],-1);
+        for(int i=0;i<grid.length;i++){
+            ans=Math.min(ans,findfalling(grid,0,i,dp)+grid[0][i]);
+        }
+        return ans;
+    }
+}
