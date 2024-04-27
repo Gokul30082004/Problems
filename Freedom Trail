@@ -1,0 +1,30 @@
+class Solution {
+    public static int bfs(String ring,String key,int ans,int st,int index,int[][] dp){
+        if(index==key.length())
+        return ans;
+        // if(dp[index][st]>0) return dp[index][st];
+        int res=Integer.MAX_VALUE;
+        int n=st-1==-1?ring.length()-1:st-1;
+        int len=1;
+        for(int i=st;i!=n;i++){
+            if(ring.charAt(i)==key.charAt(index)){
+                // System.out.println(ring+" "+" "+len+" "+(ring.length()-(len)+2)+" "+st);
+                res=Math.min(res,bfs(ring,key,ans+Math.min(len,(ring.length()-(len)+2)),i,index+1,dp));
+                // break;
+            }
+            ++len;
+            if(i+1==ring.length())
+            i=-1;
+        }
+        if(ring.charAt(n)==key.charAt(index)){
+            // System.out.println(Math.min(len,ring.length()-(len-(ring.length()-1)+1)));
+            res=Math.min(res,bfs(ring,key,ans+2,n,index+1,dp));
+        }
+        dp[index][st]=res;
+        return res;
+    }
+    public int findRotateSteps(String ring, String key) {
+        int dp[][]=new int[key.length()][ring.length()];
+        return bfs(ring,key,0,0,0,dp);
+    }
+}
