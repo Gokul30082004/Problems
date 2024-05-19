@@ -9,6 +9,13 @@ import java.sql.*;
  *
  * @author Administrator
  */
+
+/*
+connect - mysql -uroot -p
+
+display - show databases;
+
+*/
 public class JDBC1 {
 
     /**
