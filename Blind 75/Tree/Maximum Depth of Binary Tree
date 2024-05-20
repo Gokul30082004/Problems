@@ -1,0 +1,12 @@
+class Solution {
+    private int find(TreeNode root){
+        if(root==null)return 0;
+        
+        int left=1+find(root.left);
+        int right=1+find(root.right);
+        return Math.max(left,right);
+    }
+    public int maxDepth(TreeNode root) {
+        return find(root);
+    }
+}
