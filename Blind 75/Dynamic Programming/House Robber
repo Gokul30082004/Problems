@@ -1,0 +1,16 @@
+class Solution {
+    private int houserobber(int[] nums,int i,int[] dp){
+        if(i>=nums.length) return 0;
+        if(i==nums.length-1) return nums[i];
+        if(dp[i]!=-1) return dp[i];
+        int take=houserobber(nums,i+1,dp);
+        int nontake=houserobber(nums,i+2,dp)+nums[i];
+        dp[i]=Math.max(take,nontake);
+        return Math.max(take,nontake);
+    }
+    public int rob(int[] nums) {
+        int dp[]=new int[nums.length];
+        Arrays.fill(dp,-1);
+        return houserobber(nums,0,dp);
+    }
+}
