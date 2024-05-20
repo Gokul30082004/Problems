@@ -1,0 +1,19 @@
+class Solution {
+    private int houserobber(int[] nums,int i,int[] dp,int n){
+        if(i>=n) return 0;
+        if(i==n-1) return nums[i];
+        if(dp[i]!=-1) return dp[i];
+        int take=houserobber(nums,i+1,dp,n);
+        int nontake=houserobber(nums,i+2,dp,n)+nums[i];
+        dp[i]=Math.max(take,nontake);
+        return Math.max(take,nontake);
+    }
+    public int rob(int[] nums) {
+        if(nums.length==1)return nums[0];
+        int dp[]=new int[nums.length];
+        Arrays.fill(dp,-1);
+        int take=houserobber(nums,0,dp,nums.length-1);
+        Arrays.fill(dp,-1);
+        return Math.max(take,houserobber(nums,1,dp,nums.length));
+    }
+}
