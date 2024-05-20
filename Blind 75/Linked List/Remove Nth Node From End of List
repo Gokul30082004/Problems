@@ -1,0 +1,20 @@
+class Solution {
+    public static int find(ListNode head,int n){
+        if(head.next==null){
+            return 1;
+        }
+        int ans=find(head.next,n)+1;
+        if(n+1==ans){
+            head.next=head.next.next;
+        }
+        return ans;
+    }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next==null)
+        return head.next;
+        int ans=find(head,n);
+        if(ans==n)
+        return head.next;
+        return head;
+    }
+}
