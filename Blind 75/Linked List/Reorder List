@@ -1,0 +1,16 @@
+class Solution {
+    public void reorderList(ListNode head) {
+        Stack<ListNode> list=new Stack<ListNode>();
+        ListNode temp=head;
+        while(temp!=null){
+            list.push(temp);
+            temp=temp.next;
+        }
+        temp=head;
+        while(temp!=null){
+            ListNode n=temp.next;
+            temp.next=list.pop();
+            temp=n;
+        }
+    }
+}
