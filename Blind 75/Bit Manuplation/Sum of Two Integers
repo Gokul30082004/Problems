@@ -1,0 +1,10 @@
+class Solution {
+    public int getSum(int a, int b) {
+       while(b!=0){
+           final int cry=a&b;
+           a^=b;
+           b=cry<<1;
+       }
+        return a;
+    }
+}
