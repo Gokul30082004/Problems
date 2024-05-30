@@ -1,0 +1,14 @@
+class Solution {
+    private boolean istree(TreeNode s,TreeNode t){
+        if(s==null || t==null)
+            return s==t;
+        
+        return s.val==t.val && istree(s.left,t.left) && istree(s.right,t.right);
+    }
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if(s==null) return false;
+        if(istree(s,t))
+            return true;
+        return isSubtree(s.left,t)|| isSubtree(s.right,t);
+    }
+}
