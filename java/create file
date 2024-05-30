@@ -1,0 +1,9 @@
+import java.io.*;
+public class file{
+    public static void main(String[] args) throws Exception{
+        File myfile=new File("filetxt.txt");
+        PrintWriter oup=new PrintWriter(myfile);
+        oup.println("Firs!");
+        oup.close();
+    }
+}
