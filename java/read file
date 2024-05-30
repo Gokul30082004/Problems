@@ -1,0 +1,10 @@
+import java.io.*;
+import java.util.*;
+public class file{
+    public static void main(String[] args) throws Exception{
+        File myfile=new File("filetxt.txt");
+        Scanner inp=new Scanner(myfile);
+        System.out.println(inp.nextLine());
+        inp.close();
+    }
+}
