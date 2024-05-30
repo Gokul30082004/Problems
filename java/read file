@@ -5,6 +5,8 @@ public class file{
         File myfile=new File("filetxt.txt");
         Scanner inp=new Scanner(myfile);
         while(inp.hasNext())
+            // inp.next() for going to next
+            // inp.nextInt() get as input
             System.out.println(inp.nextLine());
         inp.close();
     }
