@@ -1,0 +1,10 @@
+import java.io.*;
+import java.util.*;
+public class file{
+    public static void main(String[] args) throws Exception{
+        File myfile=new File("filetxt.txt");
+        System.out.println(myfile.getName());
+        System.out.println(myfile.getPath());
+        System.out.println(myfile.getAbsolutePath());
+    }
+}
