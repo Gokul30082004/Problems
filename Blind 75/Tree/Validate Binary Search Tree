@@ -1,0 +1,11 @@
+class Solution {
+    private boolean tree(TreeNode root,TreeNode lef,TreeNode rig){
+        if(root==null) return true;
+        if(lef!=null && root.val<=lef.val) return false;
+        if(rig!=null && root.val>=rig.val) return false;
+        return tree(root.left,lef,root) && tree(root.right,root,rig);
+    }
+    public boolean isValidBST(TreeNode root) {
+        return tree(root,null,null);
+    }
+}
