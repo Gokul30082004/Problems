@@ -1,14 +1,17 @@
 class Solution
 {
+	`//choose smaller and place in first crt position
 	int  select(int arr[], int i)
 	{
+	int temp=i;
         for(int j=i+1;j<arr.length;j++){
             if(arr[j]<arr[i]){
-                int temp=arr[j];
-                arr[j]=arr[i];
-                arr[i]=temp;
+                int temp=j;
             }
         }
+	int t=arr[i];
+        arr[i]=arr[temp];
+        arr[temp]=t;
         return 0;
 	}
 	
