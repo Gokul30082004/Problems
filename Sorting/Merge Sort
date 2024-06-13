@@ -1,4 +1,5 @@
 class Solution {
+//divide and conquer
     private void merge(int arr[],int low,int n,int mid){
         int j=mid+1, temp[]=new int[n-low+1],k=0,i=low;
         while(i<=mid && j<=n){
