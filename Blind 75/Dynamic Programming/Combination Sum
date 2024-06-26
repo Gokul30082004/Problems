@@ -1,0 +1,21 @@
+class Solution {
+    private void findcombination(int[] arr,int k,List<List<Integer>> ans,List<Integer> l,int i){
+        if(i==arr.length){
+            if(k==0){
+                ans.add(new ArrayList<>(l));
+            }
+            return;
+        }
+        if(arr[i]<=k){
+            l.add(arr[i]);
+            findcombination(arr,k-arr[i],ans,l,i);
+            l.remove(l.size()-1);
+        }
+        findcombination(arr,k,ans,l,i+1);
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans=new ArrayList<>();
+        findcombination(candidates,target,ans,new ArrayList<>(),0);
+        return ans;
+    }
+}
