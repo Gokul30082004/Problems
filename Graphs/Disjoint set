@@ -1,0 +1,20 @@
+class GfG
+{
+	int find(int a[],int x)
+    {
+          if(x == a[x])
+            return x;
+        
+        int upper_parent = find(a, a[x]);
+        a[x] = upper_parent;
+        return a[x];
+	}
+	void unionSet(int a[],int x,int z)
+    {
+        int x_ultipar = find(a, x);
+        int y_ultipar = find(a, z);
+        if(x_ultipar == y_ultipar) return;
+        a[x_ultipar] = y_ultipar;
+        return;
+	}
+}
